@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import books from "./routes/books";
+import errorHandler from "./middlewares/errorHandler";
 const app = express();
 const port = 3000;
 
@@ -7,9 +9,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello, World!" });
-});
+app.use("/books", books);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.clear();
