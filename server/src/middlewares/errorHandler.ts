@@ -1,5 +1,6 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { NextFunction, Request, Response } from "express";
+import CustomError from "../helpers/errors/CustomError";
 
 export default function errorHandler(
   error: Error,
@@ -10,9 +11,12 @@ export default function errorHandler(
   let status: number;
   let message: string;
 
-  console.log(error);
-
   switch (true) {
+    case error instanceof CustomError:
+      status = error.status;
+      message = error.message;
+      break;
+
     case error instanceof PrismaClientKnownRequestError:
       status = 404;
       message = error.message;
