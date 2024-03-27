@@ -67,6 +67,13 @@ export default class Member {
       const result = await tx.book.update({
         where: { id: book.id },
         data: { stock: { decrement: 1 } },
+        select: {
+          id: true,
+          code: true,
+          title: true,
+          author: true,
+          stock: true,
+        },
       });
 
       return result;
@@ -94,14 +101,23 @@ export default class Member {
         where: { MemberId: member.id, BookId: book.id },
       });
 
-      await tx.member.update({
-        where: { id: member.id },
-        data: { isPenalty: true, penaltyDate: new Date() },
-      });
+      if (isPenalty) {
+        await tx.member.update({
+          where: { id: member.id },
+          data: { isPenalty, penaltyDate: new Date() },
+        });
+      }
 
       const result = await tx.book.update({
         where: { id: book.id },
         data: { stock: { increment: 1 } },
+        select: {
+          id: true,
+          code: true,
+          title: true,
+          author: true,
+          stock: true,
+        },
       });
 
       return { result, isPenalty };

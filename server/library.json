@@ -1,0 +1,548 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Library RESTful API",
+    "version": "1",
+    "description": "OpenAPI for Library RESTful API",
+    "contact": {
+      "name": "Alvin Budi Hartono",
+      "email": "alvinbudihartono123@gmail.com"
+    }
+  },
+  "servers": [],
+  "paths": {
+    "/books": {
+      "get": {
+        "description": "Fetch all existing books and quantities",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "quantity": {
+                      "type": "integer"
+                    },
+                    "books": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "author": {
+                            "type": "string"
+                          },
+                          "stock": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "quantity": 5,
+                  "books": [
+                    {
+                      "id": "b718ce28-1024-460b-9830-eec820bea5dd",
+                      "title": "A Study in Scarlet",
+                      "code": "SHR-1",
+                      "author": "Arthur Conan Doyle",
+                      "stock": 1
+                    },
+                    {
+                      "id": "1778c05d-4d16-4ad6-bb70-a99960b67da4",
+                      "title": "Twilight",
+                      "code": "TW-11",
+                      "author": "Stephenie Meyer",
+                      "stock": 1
+                    },
+                    {
+                      "id": "467e9c13-b33b-455f-9e48-44a0f356ce2f",
+                      "title": "The Hobbit, or There and Back Again",
+                      "code": "HOB-83",
+                      "author": "J.R.R. Tolkien",
+                      "stock": 1
+                    },
+                    {
+                      "id": "cc7c2449-5f16-4f2e-8c19-aa69d5d13158",
+                      "title": "The Lion, the Witch and the Wardrobe",
+                      "code": "NRN-7",
+                      "author": "C.S. Lewis",
+                      "stock": 1
+                    },
+                    {
+                      "id": "3c5fbcd2-e7c0-430a-b0ff-26a02d60ab4e",
+                      "title": "Harry Potter",
+                      "code": "JK-45",
+                      "author": "J.K Rowling",
+                      "stock": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "description": "Fetch one book by id",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "id of book",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "stock": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "3c5fbcd2-e7c0-430a-b0ff-26a02d60ab4e",
+                  "title": "Harry Potter",
+                  "code": "JK-45",
+                  "author": "J.K Rowling",
+                  "stock": 1
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "No Book found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/members": {
+      "get": {
+        "description": "Fetch all existing members",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "_count": {
+                        "type": "object",
+                        "properties": {
+                          "MemberBook": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "f29894b7-9680-4c36-926a-3d9b72e7e12b",
+                    "code": "M001",
+                    "name": "Angga",
+                    "_count": {
+                      "MemberBook": 0
+                    }
+                  },
+                  {
+                    "id": "f7b77415-7d85-4481-8037-c31ba126cac0",
+                    "code": "M002",
+                    "name": "Ferry",
+                    "_count": {
+                      "MemberBook": 0
+                    }
+                  },
+                  {
+                    "id": "1266870e-4f09-435f-9417-22436a45f76f",
+                    "code": "M003",
+                    "name": "Putri",
+                    "_count": {
+                      "MemberBook": 0
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/members/{id}": {
+      "get": {
+        "description": "Fetch one member by id",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "id of member",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "_count": {
+                      "type": "object",
+                      "properties": {
+                        "MemberBook": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "id": "f29894b7-9680-4c36-926a-3d9b72e7e12b",
+                  "code": "M001",
+                  "name": "Angga",
+                  "_count": {
+                    "MemberBook": 0
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "message": "No Member found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/members/{id}/borrow/{bookId}": {
+      "patch": {
+        "description": "Member borrow book",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "id of member",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookId",
+            "description": "id of book",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "stock": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "3c5fbcd2-e7c0-430a-b0ff-26a02d60ab4e",
+                  "code": "JK-45",
+                  "title": "Harry Potter",
+                  "author": "J.K Rowling",
+                  "stock": 0
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "borrow3": {
+                    "description": "Member may not borrow more than 2 books",
+                    "value": {
+                      "message": "Member may not borrow more than 2 books"
+                    }
+                  },
+                  "penalty": {
+                    "description": "Member with penalty are not able to borrow book for 3 days",
+                    "value": {
+                      "message": "Member with penalty are not able to borrow book for 3 days"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "member": {
+                    "description": "No Member found",
+                    "value": {
+                      "message": "No Member found"
+                    }
+                  },
+                  "book": {
+                    "description": "No Book found",
+                    "value": {
+                      "message": "No Book found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/members/{id}/return{bookId}": {
+      "patch": {
+        "description": "Member return borrowed book",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "id of member",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bookId",
+            "description": "id of book",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "isPenalty": {
+                      "type": "boolean"
+                    },
+                    "book": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "author": {
+                          "type": "string"
+                        },
+                        "stock": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "description": "Member returned book",
+                    "value": {
+                      "book": {
+                        "id": "3c5fbcd2-e7c0-430a-b0ff-26a02d60ab4e",
+                        "code": "JK-45",
+                        "title": "Harry Potter",
+                        "author": "J.K Rowling",
+                        "stock": 1
+                      },
+                      "isPenalty": false
+                    }
+                  },
+                  "successWithPenalty": {
+                    "description": "Member returned book with got penalty",
+                    "value": {
+                      "book": {
+                        "id": "3c5fbcd2-e7c0-430a-b0ff-26a02d60ab4e",
+                        "code": "JK-45",
+                        "title": "Harry Potter",
+                        "author": "J.K Rowling",
+                        "stock": 1
+                      },
+                      "isPenalty": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "member": {
+                    "description": "No Member found",
+                    "value": {
+                      "message": "No Member found"
+                    }
+                  },
+                  "book": {
+                    "description": "Book not Found",
+                    "value": {
+                      "message": "No MemberBook found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
