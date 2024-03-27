@@ -371,7 +371,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "msg": {
+                    "message": {
                       "type": "string"
                     }
                   }
@@ -400,7 +400,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "msg": {
+                    "message": {
                       "type": "string"
                     }
                   }
