@@ -12,5 +12,6 @@ import prisma from "../src/config/prisma";
   } catch (error) {
     console.log(error);
     await prisma.$disconnect();
+    process.exit(1);
   }
 })();

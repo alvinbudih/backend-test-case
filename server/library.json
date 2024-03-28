@@ -425,7 +425,7 @@
         }
       }
     },
-    "/members/{id}/return{bookId}": {
+    "/members/{id}/return/{bookId}": {
       "patch": {
         "description": "Member return borrowed book",
         "parameters": [
